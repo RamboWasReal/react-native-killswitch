@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/425073/227933488-ddd066e5-10ca-4946-97ad-60268dfe894c.png" width="800">
+  <img src="https://user-images.githubusercontent.com/425073/227933488-ddd066e5-10ca-4946-97ad-60268dfe894c.png" width="700">
 
   <p>
     <strong>React Native Killswitch</strong> is a library built by <a href="https://www.mirego.com">Mirego</a> that allows mobile developers to apply<br /> runtime version-specific behaviors to their React Native application.
