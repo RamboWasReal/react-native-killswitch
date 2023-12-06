@@ -89,10 +89,6 @@ lint: ## Lint project files
 
 # Release
 # ------------------------------
-.PHONY: version
-version:
-	- yarn version
-
 .PHONY: release
 release:
 	- yarn run release-it
