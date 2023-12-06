@@ -58,7 +58,7 @@ test: ## Run the test suite
 	yarn test --forceExit --detectOpenHandles
 
 .PHONY: start-example
-start-example: ## Run the test suite
+start-example: ## Start the sample app
 	yarn --cwd example start
 
 # Check, lint and format targets
