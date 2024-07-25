@@ -54,18 +54,6 @@ describe('useKillswitch()', () => {
     appStateSpy.mockRestore();
   });
 
-  it('should display "is ok" when enabled is false', async () => {
-    fetchMock.mockResponseOnce(JSON.stringify({ isOk: true }));
-
-    const { rerender, getByTestId } = render(<App />);
-
-    rerender(<App enabled={false} />);
-
-    await waitFor(() => {
-      expect(getByTestId('killswitch-text').props.children).toBe('is ok');
-    });
-  });
-
   describe('when it receives an "ok" signal', () => {
     beforeEach(() => {
       fetchMock.mockResponse((_request) => {
@@ -75,6 +63,16 @@ describe('useKillswitch()', () => {
 
     it('should return `isOk = true`', async () => {
       render(<App />);
+
+      await waitFor(() => screen.getByText('is ok'));
+    }, 8000);
+
+    it('should display "is ok" when enabled is false', async () => {
+      fetchMock.mockResponseOnce(JSON.stringify({ isOk: true }));
+
+      const { rerender } = render(<App />);
+
+      rerender(<App enabled={false} />);
 
       await waitFor(() => screen.getByText('is ok'));
     }, 8000);
