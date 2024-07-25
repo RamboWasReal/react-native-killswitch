@@ -12,7 +12,7 @@ import { useKillswitch } from '../use-killswitch';
 import fetchMock from 'jest-fetch-mock';
 import spyOnAlert from '../__utils__/spy-on-alert';
 
-function App() {
+function App({ enabled = true }: { enabled?: boolean }) {
   const { isOk } = useKillswitch({
     iosApiKey: 'apiKey',
     androidApiKey: 'apiKey',
@@ -20,6 +20,7 @@ function App() {
     version: '1.0.0',
     apiHost: 'https://killswitch.mirego.com',
     timeout: 200,
+    enabled,
   });
 
   return (
@@ -51,6 +52,18 @@ describe('useKillswitch()', () => {
 
     appStateSpy.mockReset();
     appStateSpy.mockRestore();
+  });
+
+  it('should display "is ok" when enabled is false', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ isOk: true }));
+
+    const { rerender, getByTestId } = render(<App />);
+
+    rerender(<App enabled={false} />);
+
+    await waitFor(() => {
+      expect(getByTestId('killswitch-text').props.children).toBe('is ok');
+    });
   });
 
   describe('when it receives an "ok" signal', () => {
